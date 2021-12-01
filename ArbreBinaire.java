@@ -58,6 +58,20 @@ public class ArbreBinaire {
         }
         this.racine = pile.peek();
     }
+
+    public void printInfix(Noeud noeud) {
+        if (noeud == null) {
+            return;
+        } else {
+            printInfix(noeud.noeudGauche);
+            if (estOperande(noeud.valeur)){
+                System.out.print(ANSI_RED+noeud.valeur+ANSI_RESET);
+            }else {                
+                System.out.print(noeud.valeur);
+            }
+            printInfix(noeud.noeudDroite);
+        }
+    }
     private boolean estOperande(char c) {
         return (c == '+' || c == '-' || c == '*' || c == '/');
     }
@@ -72,8 +86,11 @@ public class ArbreBinaire {
         String charSeq = "26*51-+";
         construireArbrePos(charSeq.toCharArray());
 
-        // construireArbrePos(['+']);
-        
+    }
+
+    public void exo3() {
+        printMessage("\n\nExercice 6.3\nR:", ANSI_BLUE);
+        printInfix(this.racine);
     }
     // Méthodes auxiliaires
     public static void printMessage(String m, String color) {
@@ -85,5 +102,6 @@ public class ArbreBinaire {
         ArbreBinaire ab = new ArbreBinaire();
         ab.exo1();
         ab.exo2();
+        ab.exo3();
     }
 }
